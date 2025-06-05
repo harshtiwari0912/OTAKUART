@@ -1,0 +1,72 @@
+<%- include('./partials/head2') %>
+<% if(success && success.length > 0) { %>
+  <div class="flex justify-center mt-4">
+    <div class="bg-green-500 text-white text-center py-3 px-6 rounded-md shadow-md">
+      <%= success %>
+    </div>
+  </div>
+<% } %>
+
+<div class="w-full min-h-screen flex flex-col lg:flex-row px-6 lg:px-20 py-10 bg-gray-50 text-gray-800">
+    <!-- Sidebar Filters -->
+    <aside class="w-full lg:w-1/4 mb-10 lg:mb-0 pr-6">
+        <div class="space-y-10 sticky top-10">
+            <!-- Sort By -->
+            <div>
+                <h3 class="font-semibold text-lg mb-3">Sort By</h3>
+                <form action="/shop">
+                    <select name="sortby" class="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring focus:border-blue-300">
+                        <option value="popular">Popular</option>
+                        <option value="newest">Newest</option>
+                    </select>
+                </form>
+            </div>
+
+            <!-- Categories -->
+            <div>
+                <h3 class="font-semibold text-lg mb-3">Categories</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:underline">New Collection</a></li>
+                    <li><a href="#" class="hover:underline">All Products</a></li>
+                    <li><a href="#" class="hover:underline">Discounted Products</a></li>
+                </ul>
+            </div>
+
+            <!-- Filters -->
+            <div>
+                <h3 class="font-semibold text-lg mb-3">Filter By</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:underline">Availability</a></li>
+                    <li><a href="#" class="hover:underline">Discount</a></li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Products Grid -->
+    <section class="w-full lg:w-3/4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <% products.forEach(function(product){ %>
+                <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform hover:scale-[1.02]">
+                    <!-- Product Image -->
+                    <div class="h-52 flex items-center justify-center bg-[<%= product.bgcolor %>]">
+                        <img class="h-[12rem] object-contain" src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="<%= product.name %>">
+                    </div>
+
+                    <!-- Product Info -->
+                    <div class="p-4 bg-[<%= product.panelcolor %>] text-[<%= product.textcolor %>] flex justify-between items-center">
+                        <div>
+                            <h3 class="font-semibold"><%= product.name %></h3>
+                            <p class="text-sm">₹ <%= product.price %></p>
+                        </div>
+                        <a href="/addtocart/<%= product._id%>" class="w-8 h-8 flex items-center justify-center rounded-full bg-white text-gray-700 hover:bg-gray-200">
+                            <i class="ri-add-line text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </section>
+</div>
+
+<%- include('./partials/footer') %>

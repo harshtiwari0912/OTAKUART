@@ -5,15 +5,10 @@ const userSchema = mongoose.Schema(
         email:String,
         password:String,
         cart:
-        {
-            type:Array,
-            default:[]
-        },
-        isadmin:
-        {
-            type:Boolean,
-            default:false
-        },
+        [{
+            type:mongoose.Schema.Types.ObjectId,
+            ref: "product"
+        }],
         orders:
         {
             type:Array,

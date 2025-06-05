@@ -1,0 +1,52 @@
+<%- include('./partials/header') %>
+<% if(success && success.length > 0) { %>
+  <div class="flex justify-center mt-4">
+    <div class="bg-green-500 text-white text-center py-3 px-6 rounded-md shadow-md">
+      <%= success %>
+    </div>
+  </div>
+<% } %>
+
+
+
+ <% if(error && error.length>0){ %>
+        <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-red-500">
+            <span class="inline-block mt-1 mb-1 text-white">
+                <%= error %>
+            </span>
+        </div>
+        <% } %>
+
+
+
+
+<div class="w-full min-h-screen flex flex-col justify-center items-center bg-gray-50 py-10 px-4 sm:px-10">
+    <div class="w-full max-w-6xl bg-white rounded-xl shadow-lg overflow-hidden grid md:grid-cols-2">
+        
+        <!-- Left: Register -->
+        <div class="p-10 bg-gray-100">
+            <h3 class="text-3xl font-semibold mb-2">Welcome to <span class="text-blue-500 font-bold">OtakuArt</span></h3>
+            <p class="text-gray-600 mb-6">Create your account</p>
+            <form autocomplete="off" action="/users/register" method="post" class="space-y-4">
+                <input class="input-field" type="text" placeholder="Full Name" name="fullname" required>
+                <input class="input-field" type="email" placeholder="Email" name="email" required>
+                <input class="input-field" type="password" placeholder="Password" name="password" required>
+                <input class="btn-primary" type="submit" value="Create My Account">
+            </form>
+        </div>
+
+        <!-- Right: Login -->
+        <div class="p-10">
+            <h4 class="text-2xl font-semibold mb-2">Login to your account</h4>
+            <p class="text-gray-600 mb-6">Already a member?</p>
+            <form autocomplete="off" action="/users/login" method="post" class="space-y-4">
+                <input class="input-field" type="email" placeholder="Email" name="email" required>
+                <input class="input-field" type="password" placeholder="Password" name="password" required>
+                <input class="btn-secondary" type="submit" value="Login">
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('./partials/footer') %>
+
